@@ -1,33 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
+import List from "./components/List";
 
 export default function App() {
   //[ 첫번째 인수 - 변수 이름 , 두번째 인수 - State를 정하는 함수 ]
   const [todoData, setTodoData] = useState([]); //todoData를 바꿀때는 setTodoData로 useState를 이용해서 처음에는 [] 빈 배열로 state를 정의
   const [value, setValue] = useState(""); // value는 처음에 빈 스트링으로 정의
-
-  const btnStyle = {
-    color: "#fff",
-    border: "none",
-    padding: "5px 9px",
-    borderRadius: "50%",
-    cursor: "pointer",
-    float: "right",
-  };
-
-  const getStyle = (completed) => {
-    return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : "none",
-    };
-  };
-
-  const handleClick = (id) => {
-    let newTodoData = todoData.filter((data) => data.id !== id);
-    console.log("newTodoData", newTodoData);
-    setTodoData(newTodoData);
-  };
 
   const hadleChange = (e) => {
     setValue(e.target.value);
@@ -50,36 +28,15 @@ export default function App() {
     setValue(""); // 업데이트 후 빈칸으로
   };
 
-  const handleCompleteChange = (id) => {
-    let newTodoData = todoData.map((data) => {
-      if (data.id === id) {
-        data.completed = !data.completed;
-      }
-      return data;
-    });
-
-    setTodoData(newTodoData);
-  };
-
   return (
     <div className="container">
       <div className="todoBlock">
         <div className="title">
           <h1>할 일 목록</h1>
         </div>
-        {todoData.map((data) => (
-          <div style={getStyle(data.completed)} key={data.id}>
-            <input
-              type="checkbox"
-              defaultChecked={false}
-              onChange={() => handleCompleteChange(data.id)}
-            />
-            {data.title}
-            <button style={btnStyle} onClick={() => handleClick(data.id)}>
-              x
-            </button>
-          </div>
-        ))}
+        {/* List 컴포넌트에 Props 내려주기 */}
+        <List todoData={todoData} setTodoData={setTodoData} />
+
         <form style={{ display: "flex" }} onSubmit={handleSubmit}>
           <input
             type="text"
