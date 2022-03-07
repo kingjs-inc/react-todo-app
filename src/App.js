@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import Form from "./components/Form";
 import List from "./components/List";
 
 export default function App() {
@@ -7,10 +8,7 @@ export default function App() {
   const [todoData, setTodoData] = useState([]); //todoData를 바꿀때는 setTodoData로 useState를 이용해서 처음에는 [] 빈 배열로 state를 정의
   const [value, setValue] = useState(""); // value는 처음에 빈 스트링으로 정의
 
-  const hadleChange = (e) => {
-    setValue(e.target.value);
-  };
-
+  // handleSubmit()은 처리하는 state들이 App.js에 있기때문에 Form으로 옮기지 않고, props로
   const handleSubmit = (e) => {
     // form 안에 input을 전솔할 때 페이지 리로드 되는 걸 막아줌
     e.preventDefault();
@@ -36,23 +34,8 @@ export default function App() {
         </div>
         {/* List 컴포넌트에 Props 내려주기 */}
         <List todoData={todoData} setTodoData={setTodoData} />
-
-        <form style={{ display: "flex" }} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="value"
-            style={{ flex: "10", padding: "5px" }}
-            placeholder="해야 할 일을 입력하세요."
-            value={value}
-            onChange={hadleChange}
-          />
-          <input
-            type="submit"
-            value="입력"
-            className="btn"
-            style={{ flex: "1" }}
-          />
-        </form>
+        {/* Form 4. Form 컴포넌트에 props 내려주기 */}
+        <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>
     </div>
   );
