@@ -1,13 +1,35 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import Lists from "./components/Lists";
-import List from "./components/Lists";
 
 export default function App() {
   console.log("App Component");
+
+  // 로컬스토리지 값 확인 후 초기 데이터 세팅
+  const initialTodoData = localStorage.getItem("todoData")
+    ? JSON.parse(localStorage.getItem("todoData"))
+    : [];
+
   //[ 첫번째 인수 - 변수 이름 , 두번째 인수 - State를 정하는 함수 ]
-  const [todoData, setTodoData] = useState([]); //todoData를 바꿀때는 setTodoData로 useState를 이용해서 처음에는 [] 빈 배열로 state를 정의
+  // const [todoData, setTodoData] = useState([]); //todoData를 바꿀때는 setTodoData로 useState를 이용해서 처음에는 [] 빈 배열로 state를 정의
+  const [todoData, setTodoData] = useState(initialTodoData);
+  // const [todoData, setTodoData] = useState(() => {
+  //   if (typeof window !== "undefined") {
+  //     const saved = window.localStorage.getItem("todoData");
+  //     if (saved !== null) {
+  //       return JSON.parse(saved);
+  //     } else {
+  //       return [""];
+  //     }
+  //   }
+  // });
+
+  // .... todoData가 업데이트 될떄마다 로컬스토리지 저장
+  useEffect(() => {
+    localStorage.setItem("todoData", JSON.stringify(todoData));
+  }, [todoData]);
+
   const [value, setValue] = useState(""); // value는 처음에 빈 스트링으로 정의
 
   const handleClick = useCallback(
@@ -35,6 +57,8 @@ export default function App() {
     // 원래 있던 할 일에 새로운 할 일 더해주기 - [ 기존 데이터를 넣어주고, 새로운 데이터를 업데이트해줌]
     setTodoData((prev) => [...prev, newTodo]); // Setter에서 이전 State를 가지고 오기 위해서는 인수에 함수를 이용해서 사용할 수 있음
     setValue(""); // 업데이트 후 빈칸으로
+
+    // localStorage.setItem("todoData", JSON.stringify(newTodo));
   };
 
   const handleRemoveAll = () => {

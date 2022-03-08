@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 
-const initialTodoData = localStorage.getItem("todoData")
-  ? JSON.parse(localStorage.getItem("todoData"))
-  : [];
-
 const List = React.memo(
   ({
     id,
