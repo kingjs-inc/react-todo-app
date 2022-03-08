@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
-import List from "./components/List";
+import List from "./components/Lists";
 
 export default function App() {
   //[ 첫번째 인수 - 변수 이름 , 두번째 인수 - State를 정하는 함수 ]
