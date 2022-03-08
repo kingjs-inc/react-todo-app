@@ -32,6 +32,7 @@ export default function App() {
         <div className="title">
           <h1>할 일 목록</h1>
         </div>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
         {/* List 컴포넌트에 Props 내려주기 */}
         <List todoData={todoData} setTodoData={setTodoData} />
         {/* Form 4. Form 컴포넌트에 props 내려주기 */}
