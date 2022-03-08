@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 import Form from "./components/Form";
+import Lists from "./components/Lists";
 import List from "./components/Lists";
 
 export default function App() {
@@ -8,6 +9,15 @@ export default function App() {
   //[ 첫번째 인수 - 변수 이름 , 두번째 인수 - State를 정하는 함수 ]
   const [todoData, setTodoData] = useState([]); //todoData를 바꿀때는 setTodoData로 useState를 이용해서 처음에는 [] 빈 배열로 state를 정의
   const [value, setValue] = useState(""); // value는 처음에 빈 스트링으로 정의
+
+  const handleClick = useCallback(
+    (id) => {
+      let newTodoData = todoData.filter((data) => data.id !== id);
+      console.log("newTodoData", newTodoData);
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
 
   // handleSubmit()은 처리하는 state들이 App.js에 있기때문에 Form으로 옮기지 않고, props로
   const handleSubmit = (e) => {
@@ -35,7 +45,11 @@ export default function App() {
         </div>
         {/* <h1>Hello world!</h1> */}
         {/* List 컴포넌트에 Props 내려주기 */}
-        <List todoData={todoData} setTodoData={setTodoData} />
+        <Lists
+          handleClick={handleClick}
+          todoData={todoData}
+          setTodoData={setTodoData}
+        />
         {/* Form 4. Form 컴포넌트에 props 내려주기 */}
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>

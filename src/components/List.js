@@ -1,7 +1,16 @@
 import React from "react";
 
 const List = React.memo(
-  ({ id, title, completed, todoData, setTodoData, provided, snapshot }) => {
+  ({
+    id,
+    title,
+    completed,
+    todoData,
+    setTodoData,
+    provided,
+    snapshot,
+    handleClick,
+  }) => {
     console.log("List Component");
     // 필요한 State 함수 가져오기
     const handleCompleteChange = (id) => {
@@ -12,12 +21,6 @@ const List = React.memo(
         return data;
       });
 
-      setTodoData(newTodoData);
-    };
-
-    const handleClick = (id) => {
-      let newTodoData = todoData.filter((data) => data.id !== id);
-      console.log("newTodoData", newTodoData);
       setTodoData(newTodoData);
     };
 

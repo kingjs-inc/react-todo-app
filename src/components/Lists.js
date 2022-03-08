@@ -4,7 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import { DragDropContext } from "react-beautiful-dnd";
 import List from "./List";
 
-const Lists = React.memo(({ todoData, setTodoData }) => {
+const Lists = React.memo(({ todoData, setTodoData, handleClick }) => {
   console.log("Lists Component");
 
   //   인자를 ( props ) 로 받을 경우 아래처럼 사용할수도 있으나 직관적으로 사용하는것이 더 나음.
@@ -43,6 +43,7 @@ const Lists = React.memo(({ todoData, setTodoData }) => {
                 >
                   {(provided, snapshot) => (
                     <List
+                      handleClick={handleClick}
                       key={data.id}
                       id={data.id}
                       title={data.title}
