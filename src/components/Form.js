@@ -2,6 +2,7 @@ import React from "react";
 //    Form 1. Form 컴포넌트 생성
 //                            Form 5. props로 필요한 데이터 함수 가져오기
 export default function Form({ handleSubmit, value, setValue }) {
+  console.log("Form Component");
   //   Form 3. 필요 함수 가져오기
   const hadleChange = (e) => {
     setValue(e.target.value);

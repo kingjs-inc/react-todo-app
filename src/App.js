@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import List from "./components/Lists";
 
 export default function App() {
+  console.log("App Component");
   //[ 첫번째 인수 - 변수 이름 , 두번째 인수 - State를 정하는 함수 ]
   const [todoData, setTodoData] = useState([]); //todoData를 바꿀때는 setTodoData로 useState를 이용해서 처음에는 [] 빈 배열로 state를 정의
   const [value, setValue] = useState(""); // value는 처음에 빈 스트링으로 정의

@@ -4,8 +4,9 @@ import { Droppable } from "react-beautiful-dnd";
 import { DragDropContext } from "react-beautiful-dnd";
 import List from "./List";
 
-// Props로 필요한 데이터 함수 가져오기
-export default function Lists({ todoData, setTodoData }) {
+const Lists = React.memo(({ todoData, setTodoData }) => {
+  console.log("Lists Component");
+
   //   인자를 ( props ) 로 받을 경우 아래처럼 사용할수도 있으나 직관적으로 사용하는것이 더 나음.
   // props.todoData;
 
@@ -28,7 +29,6 @@ export default function Lists({ todoData, setTodoData }) {
     setTodoData(newTodoData);
   };
 
-  //   UI 부분 가져오기
   return (
     <div>
       <DragDropContext onDragEnd={handleEnd}>
@@ -62,4 +62,6 @@ export default function Lists({ todoData, setTodoData }) {
       </DragDropContext>
     </div>
   );
-}
+});
+
+export default Lists;
