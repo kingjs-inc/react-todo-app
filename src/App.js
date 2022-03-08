@@ -37,11 +37,16 @@ export default function App() {
     setValue(""); // 업데이트 후 빈칸으로
   };
 
+  const handleRemoveAll = () => {
+    setTodoData([]);
+  };
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
       <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">
         <div className="flex justify-between mb-3">
-          <h1>할 일 목록</h1>
+          <h1>투 두!</h1>
+          <button onClick={handleRemoveAll}>모두 지우기</button>
         </div>
         {/* <h1>Hello world!</h1> */}
         {/* List 컴포넌트에 Props 내려주기 */}
